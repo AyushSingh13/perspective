@@ -6,6 +6,7 @@ let isLeapYear = year =>
   year mod 4 == 0 && year mod 100 != 0 || year mod 400 == 0 ? true : false;
 
 let dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+
 let getDayOfYear = (year, month, dayOfMonth) =>
   isLeapYear(year) ?
     List.nth(dayCount, month) + dayOfMonth :
@@ -22,8 +23,10 @@ let make = _children => {
     let currentTime = Js.Date.make();
     /* Day */
     let hour = Js.Date.getHours(currentTime);
+    let minutes = Js.Date.getMinutes(currentTime);
     let elapsedDay =
-      string_of_float(hour /. 24. *. 100.) ++ "% of the day has passed.";
+      string_of_float((hour +. minutes /. 60.) /. 24. *. 100.)
+      ++ "% of the day has passed.";
 
     /* Year */
     let currYear = int_of_float(Js.Date.getFullYear(currentTime));

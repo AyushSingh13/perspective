@@ -1,6 +1,16 @@
 [%bs.raw {|require('./App.css')|}];
 
-let component = ReasonReact.statelessComponent("App");
+type action = 
+  | TickMinute
+  | TickSecond
+;
+
+type state = {
+  minute: float,
+  second: float
+};
+
+let component = ReasonReact.reducerComponent("App");
 
 let isLeapYear = year =>
   year mod 4 == 0 && year mod 100 != 0 || year mod 400 == 0 ? true : false;
@@ -19,12 +29,24 @@ let getDaysInMonth = (year, month) =>
 
 let make = _children => {
   ...component,
-  render: _self => {
+  initialState: () => {
+    minute: Js.Date.getMinutes(Js.Date.make()),
+    second: Js.Date.getSeconds(Js.Date.make())
+  },
+  reducer: (action, state) => switch(action) {
+  | TickMinute => ReasonReact.Update({ ...state, minute: Js.Date.getMinutes(Js.Date.make()) })
+  | TickSecond => ReasonReact.Update({ ...state, second: Js.Date.getSeconds(Js.Date.make()) })
+  },
+  didMount: self => {
+    let intervalId = Js.Global.setInterval(() => self.send(TickMinute), 60000);
+    let intervalId1 = Js.Global.setInterval(() => self.send(TickSecond), 1000);
+  },
+  render: self => {
     let currentTime = Js.Date.make();
     /* Day */
     let hour = Js.Date.getHours(currentTime);
-    let minutes = Js.Date.getMinutes(currentTime);
-    let elapsedDay = (hour +. minutes /. 60.) /. 24.;
+    let second = Js.Date.getSeconds(Js.Date.make());
+    let elapsedDay = (hour +. self.state.minute /. 60. +. second /. 3600.) /. 24.;
     
     /* Year */
     let currYear = int_of_float(Js.Date.getFullYear(currentTime));

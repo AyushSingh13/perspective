@@ -6,7 +6,7 @@ let make = (~progress, _children) => {
     <div
       style=(
         ReactDOMRe.Style.make(
-          ~background="linear-gradient(to right, green, yellow, red)",
+          ~background="linear-gradient(to right, #8BC34A, #FFEB3B, #EF5350)",
           ~borderRadius="1em",
           ~height="1.5em",
           ~width="80%",

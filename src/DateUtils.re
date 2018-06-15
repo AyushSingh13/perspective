@@ -12,3 +12,18 @@ let getDaysInMonth = (year, month) =>
   isLeapYear(year) && month + 1 == 2 ?
     List.nth(dayCount, month + 1) - List.nth(dayCount, month) + 1 :
     List.nth(dayCount, month + 1) - List.nth(dayCount, month);
+
+let months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];

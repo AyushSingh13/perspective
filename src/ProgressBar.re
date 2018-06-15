@@ -7,8 +7,8 @@ let make = (~progress, _children) => {
       style=(
         ReactDOMRe.Style.make(
           ~backgroundColor="gray",
-          ~height="1em",
-          /* ~width="80%", */
+          ~height="1.5em",
+          ~width="80%",
           (),
         )
       )>

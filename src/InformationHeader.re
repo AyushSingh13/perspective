@@ -9,7 +9,8 @@ let make = _children => {
       currentTime |> Js.Date.getMonth |> int_of_float |> List.nth(months);
     let date = currentTime |> Js.Date.getDate |> int_of_float;
     let year = currentTime |> Js.Date.getFullYear |> int_of_float;
-    <h1>
+    <h1
+      style=(ReactDOMRe.Style.make(~color="#BDBDBD", ~fontWeight="100", ()))>
       (
         ReasonReact.string(
           monthLabel

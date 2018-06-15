@@ -30,8 +30,8 @@ let getDaysInMonth = (year, month) =>
 let make = _children => {
   ...component,
   initialState: () => {
-    minute: Js.Date.getMinutes(Js.Date.make()),
-    second: Js.Date.getSeconds(Js.Date.make())
+    minute: Js.Date.make() |> Js.Date.getMinutes,
+    second: Js.Date.make() |> Js.Date.getSeconds
   },
   reducer: (action, state) => switch(action) {
   | TickMinute => ReasonReact.Update({ ...state, minute: Js.Date.getMinutes(Js.Date.make()) })
@@ -44,14 +44,13 @@ let make = _children => {
   render: self => {
     let currentTime = Js.Date.make();
     /* Day */
-    let hour = Js.Date.getHours(currentTime);
-    let second = Js.Date.getSeconds(Js.Date.make());
-    let elapsedDay = (hour +. self.state.minute /. 60. +. second /. 3600.) /. 24.;
+    let hour = currentTime |> Js.Date.getHours;
+    let elapsedDay = (hour +. self.state.minute /. 60. +. self.state.second /. 3600.) /. 24.;
     
     /* Year */
-    let currYear = int_of_float(Js.Date.getFullYear(currentTime));
-    let currMonth = int_of_float(Js.Date.getMonth(currentTime));
-    let dayOfMonth = int_of_float(Js.Date.getDate(currentTime));
+    let currYear = currentTime |> Js.Date.getFullYear |> int_of_float;
+    let currMonth = currentTime |> Js.Date.getMonth |> int_of_float;
+    let dayOfMonth = currentTime |> Js.Date.getDate |> int_of_float;
     let daysInYear = isLeapYear(currYear) ? 366 : 365;
     let elapsedYear = 
       float_of_int(getDayOfYear(currYear, currMonth, dayOfMonth))
@@ -63,14 +62,18 @@ let make = _children => {
         /. float_of_int(getDaysInMonth(currYear, currMonth));
 
     /* Week */
-    let dayOfWeek = Js.Date.getDay(currentTime);
+    let dayOfWeek = currentTime |> Js.Date.getDay;
     let elapsedWeek = dayOfWeek /. 7.;
     <div className="App">
       (ReasonReact.string("perspective"))
       <h1> (ReasonReact.string("Day: " ++ string_of_float(elapsedDay *. 100.) ++ "%")) </h1>
+      <ProgressBar progress=(int_of_float(elapsedDay *. 100.)) />
       <h1> (ReasonReact.string("Week: " ++ string_of_float(elapsedWeek *. 100.) ++ "%")) </h1>
+      <ProgressBar progress=(int_of_float(elapsedWeek *. 100.)) />
       <h1> (ReasonReact.string("Month: " ++ string_of_float(elapsedMonth *. 100.) ++ "%")) </h1>
+      <ProgressBar progress=(int_of_float(elapsedMonth *. 100.)) />
       <h1> (ReasonReact.string("Year: " ++ string_of_float(elapsedYear *. 100.) ++ "%")) </h1>
+      <ProgressBar progress=(int_of_float(elapsedYear *. 100.)) />
     </div>;
   },
 };

@@ -6,7 +6,7 @@ let make = (~progress, _children) => {
     <div
       style=(
         ReactDOMRe.Style.make(
-          ~backgroundColor="gray",
+          ~background="linear-gradient(to right, green, yellow, red)",
           ~height="1.5em",
           ~width="80%",
           (),
@@ -15,9 +15,11 @@ let make = (~progress, _children) => {
       <div
         style=(
           ReactDOMRe.Style.make(
-            ~backgroundColor="#444444",
+            ~background="#dfe6e9",
+            ~opacity="1",
+            ~float="right",
             ~height="100%",
-            ~width=string_of_int(progress) ++ "%",
+            ~width=string_of_int(100 - progress) ++ "%",
             (),
           )
         )

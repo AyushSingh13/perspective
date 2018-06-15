@@ -1,4 +1,5 @@
 [%bs.raw {|require('./App.css')|}];
+open DateUtils;
 
 type action = 
   | TickMinute
@@ -11,21 +12,6 @@ type state = {
 };
 
 let component = ReasonReact.reducerComponent("App");
-
-let isLeapYear = year =>
-  year mod 4 == 0 && year mod 100 != 0 || year mod 400 == 0 ? true : false;
-
-let dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
-
-let getDayOfYear = (year, month, dayOfMonth) =>
-  isLeapYear(year) ?
-    List.nth(dayCount, month) + dayOfMonth :
-    List.nth(dayCount, month) + dayOfMonth + 1;
-
-let getDaysInMonth = (year, month) =>
-  isLeapYear(year) && month + 1 == 2 ?
-    List.nth(dayCount, month + 1) - List.nth(dayCount, month) + 1 :
-    List.nth(dayCount, month + 1) - List.nth(dayCount, month);
 
 let make = _children => {
   ...component,
@@ -65,14 +51,14 @@ let make = _children => {
     let dayOfWeek = currentTime |> Js.Date.getDay;
     let elapsedWeek = dayOfWeek /. 7.;
     <div className="App">
-      (ReasonReact.string("perspective"))
-      <h1> (ReasonReact.string("Day: " ++ string_of_float(elapsedDay *. 100.) ++ "%")) </h1>
+      <InformationHeader />
+      <h3> (ReasonReact.string("Day: " ++ string_of_float(elapsedDay *. 100.) ++ "%")) </h3>
       <ProgressBar progress=(int_of_float(elapsedDay *. 100.)) />
-      <h1> (ReasonReact.string("Week: " ++ string_of_float(elapsedWeek *. 100.) ++ "%")) </h1>
+      <h3> (ReasonReact.string("Week: " ++ string_of_float(elapsedWeek *. 100.) ++ "%")) </h3>
       <ProgressBar progress=(int_of_float(elapsedWeek *. 100.)) />
-      <h1> (ReasonReact.string("Month: " ++ string_of_float(elapsedMonth *. 100.) ++ "%")) </h1>
+      <h3> (ReasonReact.string("Month: " ++ string_of_float(elapsedMonth *. 100.) ++ "%")) </h3>
       <ProgressBar progress=(int_of_float(elapsedMonth *. 100.)) />
-      <h1> (ReasonReact.string("Year: " ++ string_of_float(elapsedYear *. 100.) ++ "%")) </h1>
+      <h3> (ReasonReact.string("Year: " ++ string_of_float(elapsedYear *. 100.) ++ "%")) </h3>
       <ProgressBar progress=(int_of_float(elapsedYear *. 100.)) />
     </div>;
   },

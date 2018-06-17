@@ -1,6 +1,6 @@
 let component = ReasonReact.statelessComponent("ProgressBar");
 
-let make = (~progress, _children) => {
+let make = (~progress, ~label="", _children) => {
   ...component,
   render: _self => {
     let borderRadius = progress == 0 ? "1em" : "0 1em 1em 0";
@@ -27,6 +27,9 @@ let make = (~progress, _children) => {
           )
         )
       />
+      <div style=(ReactDOMRe.Style.make(~position="fixed", ()))>
+        (ReasonReact.string(label))
+      </div>
     </div>;
   },
 };

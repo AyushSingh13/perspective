@@ -3,11 +3,13 @@ open DateUtils;
 
 type action =
   | TickMinute
-  | TickSecond;
+  | TickSecond
+  | ToggleShowPecentages;
 
 type state = {
   minute: float,
   second: float,
+  shouldShowPercent: bool,
 };
 
 let component = ReasonReact.reducerComponent("App");
@@ -17,6 +19,7 @@ let make = _children => {
   initialState: () => {
     minute: Js.Date.make() |> Js.Date.getMinutes,
     second: Js.Date.make() |> Js.Date.getSeconds,
+    shouldShowPercent: false,
   },
   reducer: (action, state) =>
     switch (action) {
@@ -29,6 +32,11 @@ let make = _children => {
       ReasonReact.Update({
         ...state,
         second: Js.Date.getSeconds(Js.Date.make()),
+      })
+    | ToggleShowPecentages =>
+      ReasonReact.Update({
+        ...state,
+        shouldShowPercent: ! state.shouldShowPercent,
       })
     },
   didMount: self => {
@@ -65,12 +73,32 @@ let make = _children => {
     /* Week */
     let dayOfWeek = currentTime |> Js.Date.getDay;
     let elapsedWeek = dayOfWeek /. 7.;
+
     <div className="App">
       <InformationHeader />
-      <TimeVisualisation progress=elapsedDay timeType="day" />
-      <TimeVisualisation progress=elapsedWeek timeType="week" />
-      <TimeVisualisation progress=elapsedMonth timeType="month" />
-      <TimeVisualisation progress=elapsedYear timeType="year" />
+      <TimeVisualisation
+        progress=elapsedDay
+        timeType="day"
+        shouldShowPercent=self.state.shouldShowPercent
+      />
+      <TimeVisualisation
+        progress=elapsedWeek
+        timeType="week"
+        shouldShowPercent=self.state.shouldShowPercent
+      />
+      <TimeVisualisation
+        progress=elapsedMonth
+        timeType="month"
+        shouldShowPercent=self.state.shouldShowPercent
+      />
+      <TimeVisualisation
+        progress=elapsedYear
+        timeType="year"
+        shouldShowPercent=self.state.shouldShowPercent
+      />
+      <button onClick=(_event => self.send(ToggleShowPecentages))>
+        (ReasonReact.string("Show Percentage"))
+      </button>
     </div>;
   },
 };

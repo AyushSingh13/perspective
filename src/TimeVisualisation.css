@@ -5,3 +5,7 @@
     justify-content: center;
     width: 70%;
 }
+
+.time-label {
+    font-weight: 300;
+}

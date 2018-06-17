@@ -2,7 +2,7 @@
 
 Perspective is an example ReasonReact app built mainly to use OCaml to create webapps.
 
-# Installation
+## Installation
 First, make sure you have the BuckeScript compiler installed. This converts OCaml code into readable JavaScript!
 ```
 $ yarn global add bs-platform

@@ -67,38 +67,10 @@ let make = _children => {
     let elapsedWeek = dayOfWeek /. 7.;
     <div className="App">
       <InformationHeader />
-      <h3>
-        (
-          ReasonReact.string(
-            "Day: " ++ string_of_float(elapsedDay *. 100.) ++ "%",
-          )
-        )
-      </h3>
-      <ProgressBar progress=(int_of_float(elapsedDay *. 100.)) />
-      <h3>
-        (
-          ReasonReact.string(
-            "Week: " ++ string_of_float(elapsedWeek *. 100.) ++ "%",
-          )
-        )
-      </h3>
-      <ProgressBar progress=(int_of_float(elapsedWeek *. 100.)) />
-      <h3>
-        (
-          ReasonReact.string(
-            "Month: " ++ string_of_float(elapsedMonth *. 100.) ++ "%",
-          )
-        )
-      </h3>
-      <ProgressBar progress=(int_of_float(elapsedMonth *. 100.)) />
-      <h3>
-        (
-          ReasonReact.string(
-            "Year: " ++ string_of_float(elapsedYear *. 100.) ++ "%",
-          )
-        )
-      </h3>
-      <ProgressBar progress=(int_of_float(elapsedYear *. 100.)) />
+      <TimeVisualisation progress=elapsedDay timeType="day" />
+      <TimeVisualisation progress=elapsedWeek timeType="week" />
+      <TimeVisualisation progress=elapsedMonth timeType="month" />
+      <TimeVisualisation progress=elapsedYear timeType="year" />
     </div>;
   },
 };

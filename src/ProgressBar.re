@@ -10,7 +10,7 @@ let make = (~progress, _children) => {
           ~background="linear-gradient(to right, #8BC34A, #FFEB3B, #EF5350)",
           ~borderRadius="1em",
           ~height="1.5em",
-          ~width="80%",
+          ~width="100%",
           (),
         )
       )>

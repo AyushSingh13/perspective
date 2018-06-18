@@ -9,7 +9,6 @@ div, button {
   flex-direction: column;
   justify-content: center;
   font-family: Lato, Helvetica, sans-serif;
-  font-weight: 100;
   align-items: center;
   height: 100vh;
   width: 100vw;

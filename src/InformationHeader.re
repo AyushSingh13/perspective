@@ -14,8 +14,8 @@ let make = _children => {
     <h1
       style=(
         ReactDOMRe.Style.make(
-          ~color="#BDBDBD",
-          ~fontWeight="100",
+          /* ~color="#BDBDBD", */
+          ~fontWeight="300",
           ~margin="0.5em",
           (),
         )

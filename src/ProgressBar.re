@@ -27,7 +27,19 @@ let make = (~progress, ~label="", _children) => {
           )
         )
       />
-      <div style=(ReactDOMRe.Style.make(~position="fixed", ()))>
+      <div
+        style=(
+          ReactDOMRe.Style.make(
+            ~position="fixed",
+            ~color="white",
+            ~fontWeight="300",
+            ~width="100%",
+            /* ~left="50%", */
+            /* ~top="50%", */
+            /* ~transform="translate(-50%, -50%)", */
+            (),
+          )
+        )>
         (ReasonReact.string(label))
       </div>
     </div>;

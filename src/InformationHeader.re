@@ -16,7 +16,7 @@ let make = _children => {
       (
         ReasonReact.string(
           weekLabel
-          ++ " "
+          ++ ", "
           ++ monthLabel
           ++ " "
           ++ string_of_int(date)

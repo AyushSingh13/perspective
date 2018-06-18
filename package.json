@@ -2,6 +2,7 @@
   "name": "perspective",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ayushsingh13.github.io/perspective",
   "dependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -12,10 +13,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "prepare": "npm link bs-platform"
   },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.2",
+    "gh-pages": "^1.2.0",
     "reason-react": "^0.4.2"
   }
 }

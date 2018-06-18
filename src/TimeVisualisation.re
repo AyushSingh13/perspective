@@ -6,7 +6,7 @@ let make = (~progress, ~timeType, ~shouldShowPercent, _children) => {
   ...component,
   render: _self => {
     let progressLabel =
-      timeType ++ ": " ++ (progress *. 100. |> string_of_float);
+      timeType ++ ": " ++ (progress *. 100. |> string_of_float) ++ "%";
     <div className="time-vis-container">
       (
         shouldShowPercent ?

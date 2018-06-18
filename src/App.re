@@ -1,4 +1,5 @@
 [%bs.raw {|require('./App.css')|}];
+[%bs.raw {|require('./UiComponents.css')|}];
 open DateUtils;
 
 type action =
@@ -97,18 +98,7 @@ let make = _children => {
         shouldShowPercent=self.state.shouldShowPercent
       />
       <button
-        style=(
-          ReactDOMRe.Style.make(
-            ~borderRadius="2em",
-            ~border="none",
-            ~backgroundColor="#dfe6e9",
-            ~height="3em",
-            ~width="15em",
-            ~padding="0.5em 1em",
-            (),
-          )
-        )
-        onClick=(_event => self.send(ToggleShowPecentages))>
+        className="btn" onClick=(_event => self.send(ToggleShowPecentages))>
         (ReasonReact.string("Show Percentage"))
       </button>
     </div>;

@@ -12,7 +12,14 @@ let make = _children => {
     let date = currentTime |> Js.Date.getDate |> int_of_float;
     let year = currentTime |> Js.Date.getFullYear |> int_of_float;
     <h1
-      style=(ReactDOMRe.Style.make(~color="#BDBDBD", ~fontWeight="100", ()))>
+      style=(
+        ReactDOMRe.Style.make(
+          ~color="#BDBDBD",
+          ~fontWeight="100",
+          ~margin="0.5em",
+          (),
+        )
+      )>
       (
         ReasonReact.string(
           weekLabel

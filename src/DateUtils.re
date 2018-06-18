@@ -27,3 +27,13 @@ let months = [
   "Nov",
   "Dec",
 ];
+
+let weekdays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];

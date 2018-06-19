@@ -75,8 +75,11 @@ let make = _children => {
     let dayOfWeek = currentTime |> Js.Date.getDay;
     let elapsedWeek = dayOfWeek /. 7.;
 
+    let handleToggleShowPercentage = _event =>
+      self.send(ToggleShowPecentages);
+
     <div className="App">
-      <InformationHeader />
+      <InformationHeader handleDetailToggle=handleToggleShowPercentage />
       <TimeVisualisation
         progress=elapsedDay
         timeType="day"
@@ -97,10 +100,10 @@ let make = _children => {
         timeType="year"
         shouldShowPercent=self.state.shouldShowPercent
       />
-      <button
-        className="btn" onClick=(_event => self.send(ToggleShowPecentages))>
-        (ReasonReact.string("Show Percentage"))
-      </button>
     </div>;
+    /* <button
+         className="btn" onClick=(_event => self.send(ToggleShowPecentages))>
+         (ReasonReact.string("Show Percentages"))
+       </button> */
   },
 };

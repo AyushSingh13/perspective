@@ -23,8 +23,8 @@ let make = (~progress, ~label="", _children) => {
         style=(
           ReactDOMRe.Style.make(
             ~position="absolute",
-            ~color="white",
-            ~fontWeight="500",
+            /* ~color="#636e72", */
+            ~fontWeight="300",
             ~zIndex="2",
             (),
           )

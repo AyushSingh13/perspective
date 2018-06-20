@@ -35,9 +35,15 @@ let make =
         <button onClick=handleDetailToggle className=buttonClassName>
           (ReasonReact.string("show details"))
         </button>
-        <button onClick=handleToggleDarkMode className=buttonClassName>
-          (ReasonReact.string("dark mode"))
-        </button>
+        (
+          isDarkMode ?
+            <button onClick=handleToggleDarkMode className=buttonClassName>
+              (ReasonReact.string("light mode"))
+            </button> :
+            <button onClick=handleToggleDarkMode className=buttonClassName>
+              (ReasonReact.string("dark mode"))
+            </button>
+        )
       </div>
     </div>;
   },

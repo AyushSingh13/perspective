@@ -5,12 +5,14 @@ open DateUtils;
 type action =
   | TickMinute
   | TickSecond
-  | ToggleShowPecentages;
+  | ToggleShowPecentages
+  | ToggleDarkMode;
 
 type state = {
   minute: float,
   second: float,
   shouldShowPercent: bool,
+  isDarkMode: bool,
 };
 
 let component = ReasonReact.reducerComponent("App");
@@ -21,6 +23,7 @@ let make = _children => {
     minute: Js.Date.make() |> Js.Date.getMinutes,
     second: Js.Date.make() |> Js.Date.getSeconds,
     shouldShowPercent: false,
+    isDarkMode: false,
   },
   reducer: (action, state) =>
     switch (action) {
@@ -39,6 +42,8 @@ let make = _children => {
         ...state,
         shouldShowPercent: ! state.shouldShowPercent,
       })
+    | ToggleDarkMode =>
+      ReasonReact.Update({...state, isDarkMode: ! state.isDarkMode})
     },
   didMount: self => {
     let intervalId =
@@ -78,27 +83,39 @@ let make = _children => {
     let handleToggleShowPercentage = _event =>
       self.send(ToggleShowPecentages);
 
-    <div className="App">
-      <InformationHeader handleDetailToggle=handleToggleShowPercentage />
+    let handleToggleDarkMode = _event => self.send(ToggleDarkMode);
+
+    let appClassName = self.state.isDarkMode ? "App dark-mode" : "App";
+
+    <div className=appClassName>
+      <InformationHeader
+        handleDetailToggle=handleToggleShowPercentage
+        isDarkMode=self.state.isDarkMode
+        handleToggleDarkMode
+      />
       <TimeVisualisation
         progress=elapsedDay
         timeType="day"
         shouldShowPercent=self.state.shouldShowPercent
+        isDarkMode=self.state.isDarkMode
       />
       <TimeVisualisation
         progress=elapsedWeek
         timeType="week"
         shouldShowPercent=self.state.shouldShowPercent
+        isDarkMode=self.state.isDarkMode
       />
       <TimeVisualisation
         progress=elapsedMonth
         timeType="month"
         shouldShowPercent=self.state.shouldShowPercent
+        isDarkMode=self.state.isDarkMode
       />
       <TimeVisualisation
         progress=elapsedYear
         timeType="year"
         shouldShowPercent=self.state.shouldShowPercent
+        isDarkMode=self.state.isDarkMode
       />
     </div>;
     /* <button

@@ -12,3 +12,18 @@
     color: white;
     background-color: black;
 }
+
+.btn-dark {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 2rem;
+    margin: 2rem 0 2rem 2rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+}
+
+.btn-dark:hover {
+    /* color: black; */
+    background-color: #353b48;
+}

@@ -4,7 +4,8 @@ open DateUtils;
 
 let component = ReasonReact.statelessComponent("InformationHeader");
 
-let make = (~handleDetailToggle, _children) => {
+let make =
+    (~handleDetailToggle, ~isDarkMode, ~handleToggleDarkMode, _children) => {
   ...component,
   render: _self => {
     let currentTime = Js.Date.make();
@@ -14,6 +15,7 @@ let make = (~handleDetailToggle, _children) => {
       currentTime |> Js.Date.getDay |> int_of_float |> List.nth(weekdays);
     let date = currentTime |> Js.Date.getDate |> int_of_float;
     let year = currentTime |> Js.Date.getFullYear |> int_of_float;
+    let buttonClassName = isDarkMode ? "btn-dark" : "btn";
     <div className="header-container">
       <div className="date-label">
         <h1> (ReasonReact.string(weekLabel)) </h1>
@@ -29,8 +31,11 @@ let make = (~handleDetailToggle, _children) => {
           )
         </h1>
       </div>
-      <button onClick=handleDetailToggle className="btn">
-        (ReasonReact.string("Show Details"))
+      <button onClick=handleDetailToggle className=buttonClassName>
+        (ReasonReact.string("show details"))
+      </button>
+      <button onClick=handleToggleDarkMode className=buttonClassName>
+        (ReasonReact.string("dark mode"))
       </button>
     </div>;
   },

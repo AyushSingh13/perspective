@@ -118,9 +118,5 @@ let make = _children => {
         isDarkMode=self.state.isDarkMode
       />
     </div>;
-    /* <button
-         className="btn" onClick=(_event => self.send(ToggleShowPecentages))>
-         (ReasonReact.string("Show Percentages"))
-       </button> */
   },
 };
